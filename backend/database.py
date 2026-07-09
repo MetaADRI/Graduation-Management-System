@@ -4,16 +4,10 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 import bcrypt
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
-
-if not DATABASE_URL:
-    raise RuntimeError(
-        "DATABASE_URL environment variable is not set.\n"
-        "  Local:   set DATABASE_URL=postgresql://...\n"
-        "  Neon:    configured in Neon dashboard\n"
-        "  Render:  set via Render Environment Variables\n"
-        "  Vercel:  set via Vercel Environment Variables"
-    )
+DATABASE_URL = os.environ.get(
+    'DATABASE_URL',
+    'postgresql://neondb_owner:npg_UI4DeQ2PMZYf@ep-billowing-dream-atdbfg0b-pooler.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+)
 
 
 class _Connection:
