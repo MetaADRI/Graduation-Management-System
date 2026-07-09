@@ -19,8 +19,10 @@ class _Row(dict):
         return super().__getitem__(key)
 
 
-def _row_factory(cursor, record):
-    return _Row(zip([d.name for d in cursor.description], record))
+def _row_factory(cursor):
+    def _make_row(cursor, record):
+        return _Row(zip([d.name for d in cursor.description], record))
+    return _make_row
 
 
 class _Connection:
