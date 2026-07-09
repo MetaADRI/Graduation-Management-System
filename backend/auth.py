@@ -1,8 +1,8 @@
 # backend/auth.py
-import jwt, datetime, functools
+import os, jwt, datetime, functools
 from flask import request, jsonify
 
-SECRET  = 'GPMS_CUZ_SECRET_CHANGE_IN_PROD'
+SECRET  = os.environ.get('JWT_SECRET', 'GPMS_CUZ_SECRET_CHANGE_IN_PROD')
 EXPIRY  = 8  # hours
 
 def create_token(user: dict) -> str:
