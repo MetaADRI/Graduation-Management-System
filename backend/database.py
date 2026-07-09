@@ -20,8 +20,9 @@ class _Row(dict):
 
 
 def _row_factory(cursor):
-    def _make_row(cursor, record):
-        return _Row(zip([d.name for d in cursor.description], record))
+    columns = tuple(d.name for d in cursor.description)
+    def _make_row(record):
+        return _Row(zip(columns, record))
     return _make_row
 
 
