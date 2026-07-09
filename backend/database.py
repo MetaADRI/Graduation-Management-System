@@ -1,7 +1,7 @@
 # backend/database.py
 import os
-import psycopg2
-from psycopg2.extras import RealDictCursor
+import psycopg
+from psycopg.rows import dict_row
 import bcrypt
 
 DATABASE_URL = os.environ.get(
@@ -10,8 +10,21 @@ DATABASE_URL = os.environ.get(
 )
 
 
+class _Row(dict):
+    """Dict that also supports integer indexing like sqlite3.Row / RealDictRow."""
+
+    def __getitem__(self, key):
+        if isinstance(key, (int, slice)):
+            return list(self.values())[key]
+        return super().__getitem__(key)
+
+
+def _row_factory(cursor, record):
+    return _Row(zip([d.name for d in cursor.description], record))
+
+
 class _Connection:
-    """Wraps a psycopg2 connection to mimic SQLite's conn.execute() shortcut."""
+    """Wraps a psycopg connection to mimic SQLite's conn.execute() shortcut."""
 
     def __init__(self, conn):
         self._conn = conn
@@ -19,7 +32,7 @@ class _Connection:
     def execute(self, sql, params=None):
         if params is None:
             params = ()
-        c = self._conn.cursor(cursor_factory=RealDictCursor)
+        c = self._conn.cursor(row_factory=_row_factory)
         c.execute(sql, params)
         return c
 
@@ -31,7 +44,8 @@ class _Connection:
 
 
 def get_db():
-    conn = psycopg2.connect(DATABASE_URL)
+    conn = psycopg.connect(DATABASE_URL)
+    conn.autocommit = False
     return _Connection(conn)
 
 
@@ -156,7 +170,6 @@ def init_db():
         )
     """)
 
-    # Seed clearance items if empty
     existing = db.execute("SELECT COUNT(*) FROM clearance_items").fetchone()[0]
     if existing == 0:
         for item in [
@@ -170,7 +183,6 @@ def init_db():
                 item
             )
 
-    # Seed document types if empty
     existing_docs = db.execute("SELECT COUNT(*) FROM document_types").fetchone()[0]
     if existing_docs == 0:
         for doc in [
@@ -187,7 +199,6 @@ def init_db():
                 doc
             )
 
-    # Seed admin if not present
     admin = db.execute("SELECT id FROM users WHERE email = 'admin@cavendish.co.zm'").fetchone()
     if not admin:
         hashed = bcrypt.hashpw(b'Admin@1234', bcrypt.gensalt()).decode()
@@ -196,7 +207,6 @@ def init_db():
             ('System Admin', 'admin@cavendish.co.zm', hashed, 'admin')
         )
 
-    # Seed graduation date if not present
     grad = db.execute("SELECT id FROM graduation_settings").fetchone()
     if not grad:
         db.execute(
