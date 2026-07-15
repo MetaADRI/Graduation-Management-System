@@ -1,0 +1,20 @@
+[build]
+  base = "frontend"
+  publish = "."
+  command = "echo 'Static site'"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://graduation-management-system.onrender.com/api/*"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/assets/*"
+  to = "/assets/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/pages/:splat"
+  status = 200
