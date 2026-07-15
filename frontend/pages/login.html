@@ -285,7 +285,7 @@
 </div>
 
 <script>
-  const API = '';
+  const API = window.location.hostname === 'localhost' ? '' : 'https://graduation-management-system-yxj4.onrender.com';
 
   const u = localStorage.getItem('gpms_user');
   if (u && localStorage.getItem('gpms_token')) {

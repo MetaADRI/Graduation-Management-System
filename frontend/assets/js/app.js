@@ -1,6 +1,6 @@
 // frontend/assets/js/app.js
 
-const API = '';
+const API = window.location.hostname === 'localhost' ? '' : 'https://graduation-management-system-yxj4.onrender.com';
 
 const Auth = {
   getToken:   ()     => localStorage.getItem('gpms_token'),
