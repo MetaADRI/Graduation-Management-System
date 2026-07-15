@@ -300,3 +300,209 @@ tr:hover td { background: var(--gray-50); }
 .page-body > *:nth-child(2) { animation-delay: .08s; }
 .page-body > *:nth-child(3) { animation-delay: .12s; }
 .page-body > *:nth-child(4) { animation-delay: .16s; }
+
+/* ── Dark Mode Toggle Button ── */
+.theme-toggle {
+  background: none; border: 1px solid var(--gray-300);
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gray-500); cursor: pointer;
+  transition: all .2s; padding: 0;
+}
+.theme-toggle:hover { background: var(--gray-50); color: var(--navy); border-color: var(--navy-mid); }
+.theme-toggle svg { width: 18px; height: 18px; }
+.theme-toggle .icon-moon { display: block; }
+.theme-toggle .icon-sun  { display: none; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun  { display: block; }
+
+/* ── Dark Mode ── */
+[data-theme="dark"] {
+  --off-white:  #0f1117;
+  --gray-50:    #161923;
+  --gray-100:   #22262f;
+  --gray-300:   #4a5060;
+  --gray-500:   #8890a4;
+  --gray-700:   #b0b8cc;
+  --text:       #e2e4ea;
+  --text-muted: #8890a4;
+  --white:      #181c26;
+  --shadow-sm:  0 1px 4px rgba(0,0,0,.3);
+  --shadow:     0 4px 20px rgba(0,0,0,.35);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,.5);
+}
+[data-theme="dark"] body { background: #0f1117; color: #e2e4ea; }
+
+/* Topbar */
+[data-theme="dark"] .topbar { background: #181c26; border-bottom-color: #22262f; }
+[data-theme="dark"] .topbar-title { color: #e2e4ea; }
+[data-theme="dark"] .theme-toggle { border-color: #3a3f4a; color: #8890a4; }
+[data-theme="dark"] .theme-toggle:hover { background: #22262f; color: #e2e4ea; border-color: #5a6b79; }
+[data-theme="dark"] .notif-btn { color: #8890a4; }
+[data-theme="dark"] .notif-btn:hover { background: #22262f; }
+
+/* Cards */
+[data-theme="dark"] .card { background: #181c26; border-color: #22262f; }
+[data-theme="dark"] .card-header { border-bottom-color: #22262f; }
+[data-theme="dark"] .card-header h3 { color: #e2e4ea; }
+
+/* Stat Cards */
+[data-theme="dark"] .stat-card { background: #181c26; border-color: #22262f; }
+[data-theme="dark"] .stat-value { color: #e2e4ea; }
+
+/* Tables */
+[data-theme="dark"] th { color: #8890a4; border-bottom-color: #22262f; background: #161923; }
+[data-theme="dark"] td { border-bottom-color: #22262f; color: #c0c4cc; }
+[data-theme="dark"] tr:hover td { background: #1c2030; }
+
+/* Forms */
+[data-theme="dark"] .form-control { background: #1c2030; border-color: #3a3f4a; color: #e2e4ea; }
+[data-theme="dark"] .form-control:focus { border-color: #5a6b79; box-shadow: 0 0 0 3px rgba(90,107,121,.2); }
+[data-theme="dark"] .form-group label { color: #8890a4; }
+[data-theme="dark"] select.form-control { background: #1c2030; color: #e2e4ea; }
+[data-theme="dark"] select.form-control option { background: #1c2030; color: #e2e4ea; }
+
+/* Buttons */
+[data-theme="dark"] .btn-outline { border-color: #3a3f4a; color: #c0c4cc; }
+[data-theme="dark"] .btn-outline:hover { border-color: #8890a4; color: #e2e4ea; }
+
+/* Badges */
+[data-theme="dark"] .badge-pending  { background: #4a3800; color: #fbbf24; }
+[data-theme="dark"] .badge-approved { background: #0a3d20; color: #4ade80; }
+[data-theme="dark"] .badge-rejected { background: #4a0f0f; color: #f87171; }
+[data-theme="dark"] .badge-passed   { background: #0a3d20; color: #4ade80; }
+[data-theme="dark"] .badge-failed   { background: #4a0f0f; color: #f87171; }
+[data-theme="dark"] .badge-navy     { background: rgba(100,140,220,.12); color: #8ab4f8; }
+[data-theme="dark"] .badge-gold     { background: rgba(200,153,31,.15); color: #fbbf24; }
+
+/* Checklist */
+[data-theme="dark"] .check-item { background: #181c26; border-color: #22262f; }
+[data-theme="dark"] .check-item.approved { border-left-color: #4ade80; }
+[data-theme="dark"] .check-item.rejected { border-left-color: #f87171; }
+[data-theme="dark"] .check-item.pending  { border-left-color: #fbbf24; }
+[data-theme="dark"] .check-icon.approved { background: #0a3d20; color: #4ade80; }
+[data-theme="dark"] .check-icon.rejected { background: #4a0f0f; color: #f87171; }
+[data-theme="dark"] .check-icon.pending  { background: #4a3800; color: #fbbf24; }
+[data-theme="dark"] .check-info h4 { color: #e2e4ea; }
+
+/* Modal */
+[data-theme="dark"] .modal-overlay { background: rgba(0,0,0,.6); }
+[data-theme="dark"] .modal { background: #181c26; box-shadow: 0 12px 40px rgba(0,0,0,.6); }
+[data-theme="dark"] .modal h3 { color: #e2e4ea; }
+
+/* Notifications Panel */
+[data-theme="dark"] .notif-panel { background: #181c26; border-color: #22262f; }
+[data-theme="dark"] .notif-panel-header { color: #e2e4ea; border-bottom-color: #22262f; }
+[data-theme="dark"] .notif-row { border-bottom-color: #22262f; }
+[data-theme="dark"] .notif-row:hover { background: #1c2030; }
+[data-theme="dark"] .notif-row.unread { background: rgba(100,140,220,.06); border-left-color: #8ab4f8; }
+[data-theme="dark"] .notif-row-title { color: #e2e4ea; }
+[data-theme="dark"] .notif-row-time { color: #5a6070; }
+
+/* Alerts */
+[data-theme="dark"] .alert-error   { background: #2d1215; border-color: #5a1a1a; color: #fca5a5; }
+[data-theme="dark"] .alert-success { background: #0a2e1a; border-color: #166534; color: #86efac; }
+[data-theme="dark"] .alert-info    { background: #0c1f3a; border-color: #1e4a7a; color: #93c5fd; }
+
+/* Gate Banner */
+[data-theme="dark"] .gate-banner { background: #2d2200; border-color: #5a4800; }
+[data-theme="dark"] .gate-banner strong { color: #fbbf24; }
+[data-theme="dark"] .gate-banner p { color: #d4a017; }
+
+/* Spinner */
+[data-theme="dark"] .spinner.dark { border-color: #3a3f4a; border-top-color: #8ab4f8; }
+
+/* Toast */
+[data-theme="dark"] #toast { background: #22262f; }
+
+/* Countdown Banner - already dark, no change needed */
+
+/* Sidebar - already dark, no change needed */
+
+/* ── Sidebar Dark Mode Refinements ── */
+[data-theme="dark"] .sidebar-brand { border-bottom-color: rgba(255,255,255,.06); }
+[data-theme="dark"] .sidebar-user { background: rgba(255,255,255,.03); border-bottom-color: rgba(255,255,255,.05); }
+[data-theme="dark"] .sidebar-footer { border-top-color: rgba(255,255,255,.06); }
+
+/* ── Dark Mode: Page-Specific Inline Style Overrides ── */
+
+/* Student Dashboard - Dept Tracker */
+[data-theme="dark"] .dept-status-row { background: #1c2030; }
+[data-theme="dark"] .dept-name { color: #8ab4f8; }
+[data-theme="dark"] .dept-progress-bar { background: #2a2e3a; }
+[data-theme="dark"] .dept-progress-fill { background: #8ab4f8; }
+[data-theme="dark"] .dept-stats { color: #8890a4; }
+[data-theme="dark"] .dept-status-badge.complete { background: #0a3d20; color: #4ade80; }
+[data-theme="dark"] .dept-status-badge.partial { background: #3d2800; color: #fbbf24; }
+[data-theme="dark"] .dept-status-badge.pending { background: #2a2e3a; color: #8890a4; }
+[data-theme="dark"] .dept-status-badge.rejected { background: #4a0f0f; color: #f87171; }
+
+/* Office Dashboard - Doc Review */
+[data-theme="dark"] .doc-review-item { background: #1c2030; border-color: #2a2e3a; }
+[data-theme="dark"] .doc-review-item.read-only { background: #161923; }
+[data-theme="dark"] .doc-review-title { color: #8ab4f8; }
+[data-theme="dark"] .doc-review-meta { color: #8890a4; }
+[data-theme="dark"] .doc-preview { background: #161923; border-color: #2a2e3a; }
+[data-theme="dark"] .doc-review-actions button:first-child { background: #1c2030; border-color: #3a3f4a; color: #e2e4ea; }
+[data-theme="dark"] .doc-review-actions button:disabled { opacity: 0.4; }
+[data-theme="dark"] .rejection-input textarea { background: #1c2030; border-color: #3a3f4a; color: #e2e4ea; }
+[data-theme="dark"] .preview-btn { background: #3a3f4a; }
+[data-theme="dark"] .preview-btn:hover { background: #5a6070; }
+
+/* Supervisor Dashboard - Doc Detail */
+[data-theme="dark"] .doc-detail-table thead { background: #161923; border-bottom-color: #2a2e3a; }
+[data-theme="dark"] .doc-detail-table th { color: #8ab4f8; }
+[data-theme="dark"] .doc-detail-table td { border-bottom-color: #2a2e3a; color: #c0c4cc; }
+[data-theme="dark"] .doc-detail-table tr:hover { background: #1c2030; }
+[data-theme="dark"] .doc-action-btn { background: #1c2030; border-color: #3a3f4a; color: #c0c4cc; }
+[data-theme="dark"] .doc-action-btn:hover { background: #8ab4f8; color: #0f1117; border-color: #8ab4f8; }
+[data-theme="dark"] .doc-empty { background: #161923; color: #8890a4; }
+
+/* Admin Dashboard - Inline colored elements */
+[data-theme="dark"] .stat-card .stat-value { color: #e2e4ea; }
+
+/* Document review modal header and footer */
+[data-theme="dark"] #doc-modal-header { background: #1a2744 !important; border-bottom-color: #2a2e3a !important; }
+[data-theme="dark"] #doc-review-modal .modal { background: #181c26; }
+[data-theme="dark"] #doc-review-modal > .modal > div:last-child { background: #161923 !important; border-top-color: #2a2e3a !important; }
+
+/* Student Documents Page */
+[data-theme="dark"] .doc-card { background: #181c26; border-color: #2a2e3a; }
+[data-theme="dark"] .doc-card.status-not-uploaded { border-color: #3a3f4a; }
+[data-theme="dark"] .doc-card-title { color: #8ab4f8; }
+[data-theme="dark"] .doc-card-description { color: #8890a4; }
+[data-theme="dark"] .doc-role-badge { background: #3a3f4a; color: #c0c4cc; }
+[data-theme="dark"] .rejection-reason { background: #2d1215; color: #fca5a5; }
+[data-theme="dark"] .btn-upload-doc { background: #8ab4f8; color: #0f1117; }
+[data-theme="dark"] .btn-upload-doc:hover { background: #a5c4fa; }
+[data-theme="dark"] .btn-reupload { border-color: #8ab4f8; color: #8ab4f8; }
+[data-theme="dark"] .btn-reupload:hover { background: #1c2030; }
+[data-theme="dark"] .btn-download { background: #1c2030; border-color: #8ab4f8; color: #8ab4f8; }
+[data-theme="dark"] .btn-download:hover { background: #8ab4f8; color: #0f1117; }
+[data-theme="dark"] .submit-section { background: #161923; border-color: #2a2e3a; }
+[data-theme="dark"] .submit-message { color: #8890a4; }
+[data-theme="dark"] .submitted-banner { background: #0a3d20; border-color: #166534; color: #86efac; }
+[data-theme="dark"] .upload-area { border-color: #3a3f4a; }
+[data-theme="dark"] .upload-area:hover { border-color: #5a6070; background: #1c2030; }
+[data-theme="dark"] .upload-area.dragover { border-color: #5a6070; background: #1c2030; }
+[data-theme="dark"] .upload-text { color: #8ab4f8; }
+[data-theme="dark"] .upload-hint { color: #8890a4; }
+[data-theme="dark"] .file-info { background: #1c2030; color: #8890a4; }
+[data-theme="dark"] .file-info.selected { color: #4ade80; }
+[data-theme="dark"] .upload-restrictions { color: #8890a4; }
+[data-theme="dark"] .modal-error { background: #2d1215; border-color: #5a1a1a; color: #fca5a5; }
+[data-theme="dark"] #upload-modal .modal { background: #181c26; }
+[data-theme="dark"] #upload-modal .modal-header { background: #1a2744 !important; }
+[data-theme="dark"] #upload-modal .modal-actions { background: #161923; border-top-color: #2a2e3a; }
+[data-theme="dark"] #upload-modal .btn-cancel { background: #1c2030; border-color: #3a3f4a; color: #c0c4cc; }
+[data-theme="dark"] #upload-modal .btn-cancel:hover { background: #2a2e3a; }
+[data-theme="dark"] #upload-modal .btn-upload { background: #8ab4f8; color: #0f1117; }
+[data-theme="dark"] #upload-modal .btn-upload:hover:not(:disabled) { background: #a5c4fa; }
+[data-theme="dark"] .spinner { border-color: #3a3f4a; border-top-color: #8ab4f8; }
+
+/* ── Dark Mode: Override inline color:var(--navy) in main content ── */
+/* Sidebar brand text stays white (inherited from .sidebar) */
+/* These target JS-rendered elements that use inline color:var(--navy) */
+.main-content [style*="color:var(--navy)"] { color: #8ab4f8 !important; }
+.topbar-title { color: var(--navy); }
+[data-theme="dark"] .topbar-title { color: #e2e4ea; }

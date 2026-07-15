@@ -106,3 +106,24 @@ document.addEventListener('click', e => {
     panel.classList.remove('open');
   }
 });
+
+// ── Dark Mode ──
+const Theme = {
+  KEY: 'gpms_theme',
+  get() { return localStorage.getItem(this.KEY) || 'light'; },
+  set(v) { localStorage.setItem(this.KEY, v); },
+  apply(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    this.set(theme);
+  },
+  toggle() {
+    const next = this.get() === 'dark' ? 'light' : 'dark';
+    this.apply(next);
+  },
+  init() {
+    this.apply(this.get());
+  }
+};
+
+// Apply stored theme immediately (before DOM ready to prevent flash)
+Theme.init();

@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="../assets/css/main.css"/>
+<script>document.documentElement.setAttribute('data-theme', localStorage.getItem('gpms_theme') || 'light');</script>
 </head>
 <body>
 <div class="app-shell">
@@ -52,6 +53,10 @@
     <header class="topbar">
       <div class="topbar-title" id="page-title">Admin Dashboard</div>
       <div class="topbar-actions">
+        <button class="theme-toggle" onclick="Theme.toggle()" title="Toggle dark mode">
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
         <div id="notif-area" style="position:relative">
           <button class="notif-btn" onclick="toggleNotifPanel()">
             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
@@ -59,7 +64,7 @@
           </button>
           <div class="notif-panel" id="notif-panel">
             <div class="notif-panel-header">Notifications
-              <button onclick="markAllRead()" style="background:none;border:none;font-size:.72rem;color:#6b7694;cursor:pointer">Mark all read</button>
+              <button onclick="markAllRead()" style="background:none;border:none;font-size:.72rem;color:var(--text-muted);cursor:pointer">Mark all read</button>
             </div>
             <div class="notif-list" id="notif-list"></div>
           </div>
@@ -371,6 +376,10 @@
     const isStu = document.getElementById('cu-role').value==='student';
     document.getElementById('cu-stdnum-wrap').style.display    = isStu?'block':'none';
     document.getElementById('cu-student-extras').style.display = isStu?'block':'none';
+    if (!isStu) {
+      document.getElementById('cu-stdnum').value = '';
+      document.getElementById('cu-program').value = '';
+    }
   }
 
   async function submitCreateUser() {

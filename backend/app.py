@@ -394,14 +394,23 @@ def admin_create_user():
     for f in ['name', 'email', 'password', 'role']:
         if not b.get(f): return err(f"Field '{f}' is required", 422)
 
+    allowed_roles = ['student','finance','library','department','academics','supervisor','admin']
+    if b['role'] not in allowed_roles:
+        return err('Invalid role', 422)
+
+    student_number = b.get('student_number') if b['role'] == 'student' else None
+
     db = get_db()
     if db.execute("SELECT id FROM users WHERE email=%s", (b['email'].lower(),)).fetchone():
         db.close(); return err('Email already exists', 409)
 
+    if student_number and db.execute("SELECT id FROM users WHERE student_number=%s", (student_number,)).fetchone():
+        db.close(); return err('Student number already exists', 409)
+
     hashed = bcrypt.hashpw(b['password'].encode(), bcrypt.gensalt()).decode()
     cur    = db.execute(
         "INSERT INTO users (student_number, name, email, password, role) VALUES (%s,%s,%s,%s,%s) RETURNING id",
-        (b.get('student_number'), b['name'].strip(), b['email'].lower().strip(), hashed, b['role'])
+        (student_number, b['name'].strip(), b['email'].lower().strip(), hashed, b['role'])
     )
     uid = cur.fetchone()[0]
     if b['role'] == 'student':
@@ -971,13 +980,13 @@ def get_documents_progress(student_id):
     
     # Get department statuses
     dept_stats = rows_to_list(db.execute(
-        """SELECT dt.reviewing_role AS role, dt.name AS label,
+        """SELECT dt.reviewing_role AS role,
                   COUNT(sd.id) AS total,
                   SUM(CASE WHEN sd.status='approved' THEN 1 ELSE 0 END) AS approved
            FROM document_types dt
            LEFT JOIN student_documents sd ON sd.document_type_id=dt.id AND sd.student_id=%s
            WHERE dt.is_required=1
-           GROUP BY dt.reviewing_role, dt.name""", (student_id,)).fetchall())
+           GROUP BY dt.reviewing_role""", (student_id,)).fetchall())
     
     # Build department status objects
     dept_statuses = []
