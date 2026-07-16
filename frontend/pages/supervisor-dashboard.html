@@ -348,7 +348,7 @@
   }
 
   function downloadStudentDoc(docId) {
-    window.open(`/api/documents/download/${docId}`, '_blank');
+    window.open(API + `/api/documents/download/${docId}`, '_blank');
   }
 
   async function supervisorApproveDoc(docId, docName) {

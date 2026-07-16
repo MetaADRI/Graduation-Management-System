@@ -351,7 +351,7 @@ table td:nth-child(5) {
         
         if (isForThisRole) {
           const token = Auth.getToken();
-          const docUrl = `/api/documents/download/${doc.id}?token=${token}`;
+          const docUrl = API + `/api/documents/download/${doc.id}?token=${token}`;
           html += `
             <div class="doc-preview">
               <iframe src="${docUrl}" class="doc-preview-frame"></iframe>
@@ -388,7 +388,7 @@ table td:nth-child(5) {
   }
 
   function downloadDoc(docId) {
-    window.open(`/api/documents/download/${docId}`, '_blank');
+    window.open(API + `/api/documents/download/${docId}`, '_blank');
   }
 
   function rejectDoc(docId, docName) {
